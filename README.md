@@ -18,6 +18,7 @@ USAGE:
    idea [command] <idea|state|id>
 
 COMMANDS:
+   init, i    Create new .ideas.json file in the current directory. Default: ~/.ideas.json
    create, c  Create new idea. Example: `idea create CLI app`
    delete, d  Delete an idea. Example: `idea delete 1`
    solve, s   Solve an idea. Example: `idea solve 1`
@@ -26,4 +27,11 @@ COMMANDS:
 
 GLOBAL OPTIONS:
    --help, -h  show help (default: false)
+```
+
+All ideas is stored in your home directory. Run command `idea init` store your ideas in the current directory, for example:
+
+```sh
+cd /to/your/project/directory
+idea init
 ```

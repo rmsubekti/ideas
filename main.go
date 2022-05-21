@@ -27,7 +27,7 @@ func main() {
 			{
 				Name:    "init",
 				Aliases: []string{"i"},
-				Usage:   "Create new .ideas.json file in the current directory.",
+				Usage:   "Create new .ideas.json file in the current directory. Default: ~/.ideas.json",
 				Action: func(c *cli.Context) error {
 					return Init()
 				},
