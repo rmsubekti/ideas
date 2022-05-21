@@ -25,6 +25,14 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			{
+				Name:    "init",
+				Aliases: []string{"i"},
+				Usage:   "Create new .ideas.json file in the current directory.",
+				Action: func(c *cli.Context) error {
+					return Init()
+				},
+			},
+			{
 				Name:    "create",
 				Aliases: []string{"c"},
 				Usage:   "Create new idea. Example: `idea create CLI app`",
@@ -43,8 +51,9 @@ func main() {
 				Aliases: []string{"d"},
 				Usage:   "Delete an idea. Example: `idea delete 1`",
 				Action: func(c *cli.Context) error {
-					id, _ := strconv.Atoi(c.Args().First())
-					return ideas.Remove(id)
+					id, err := strconv.Atoi(c.Args().First())
+					err = ideas.Remove(id)
+					return err
 				},
 			},
 			{
@@ -52,8 +61,9 @@ func main() {
 				Aliases: []string{"s"},
 				Usage:   "Solve an idea. Example: `idea solve 1`",
 				Action: func(c *cli.Context) error {
-					id, _ := strconv.Atoi(c.Args().First())
-					return ideas.Solve(id)
+					id, err := strconv.Atoi(c.Args().First())
+					ideas.Solve(id)
+					return err
 				},
 			},
 			{

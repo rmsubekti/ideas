@@ -20,14 +20,26 @@ type Idea struct {
 // Ideas List
 type Ideas []Idea
 
+var filename = ".ideas.js"
+
+// Create Initial File to store data
+func Init() error {
+	ideas := Ideas{}
+	file, err := json.Marshal(ideas)
+	err = ioutil.WriteFile(filename, file, 0644)
+	return err
+}
+
 // Load Ideas From File
 func (ideas *Ideas) Load() error {
-	dir, _ := os.UserHomeDir()
-	file, err := ioutil.ReadFile(dir + "/.ideas.json")
-	if err != nil {
-		return err
+	var file []byte
+	if fileExist(filename) {
+		file, _ = ioutil.ReadFile(filename)
+	} else {
+		dir, _ := os.UserHomeDir()
+		file, _ = ioutil.ReadFile(dir + "/" + filename)
 	}
-	err = json.Unmarshal([]byte(file), &ideas)
+	err := json.Unmarshal([]byte(file), &ideas)
 	return err
 }
 
@@ -39,9 +51,13 @@ func (ideas Ideas) Save() error {
 		return err
 	}
 
+	if fileExist(filename) {
+		err = ioutil.WriteFile(filename, file, 0644)
+		return err
+	}
+
 	dir, _ := os.UserHomeDir()
-	//writing to file
-	err = ioutil.WriteFile(dir+"/.ideas.json", file, 0644)
+	err = ioutil.WriteFile(dir+"/"+filename, file, 0644)
 	return err
 }
 
@@ -119,4 +135,12 @@ func (ideas Ideas) ListByState(state string) {
 		}
 	}
 	tbl.Print()
+}
+
+func fileExist(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
 }
