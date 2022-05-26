@@ -24,10 +24,12 @@ var filename = ".ideas.js"
 
 // Create Initial File to store data
 func Init() error {
-	ideas := Ideas{}
-	file, err := json.Marshal(ideas)
-	err = ioutil.WriteFile(filename, file, 0644)
-	return err
+	if !fileExist(filename) {
+		file, err := os.Create(filename)
+		file.Close()
+		return err
+	}
+	return nil
 }
 
 // Load Ideas From File

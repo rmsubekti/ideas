@@ -38,7 +38,7 @@ func main() {
 				Usage:   "Create new idea. Example: `idea create CLI app`",
 				Action: func(c *cli.Context) error {
 					if c.NArg() < 1 {
-						return errors.New("Need one or more arguments." +
+						return errors.New("need one or more arguments." +
 							"\n\tTry `idea create \"string argument\"` or `idea create some idea text`" +
 							"\n\tor type \"idea help create\" for help")
 					}
@@ -51,9 +51,8 @@ func main() {
 				Aliases: []string{"d"},
 				Usage:   "Delete an idea. Example: `idea delete 1`",
 				Action: func(c *cli.Context) error {
-					id, err := strconv.Atoi(c.Args().First())
-					err = ideas.Remove(id)
-					return err
+					id, _ := strconv.Atoi(c.Args().First())
+					return ideas.Remove(id)
 				},
 			},
 			{
