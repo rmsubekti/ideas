@@ -1,4 +1,4 @@
-module github.com/rmsubekti/idea
+module github.com/rmsubekti/ideas
 
 go 1.18
 
