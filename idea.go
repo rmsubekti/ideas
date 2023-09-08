@@ -34,32 +34,32 @@ func Init() error {
 
 // Load Ideas From File
 func (ideas *Ideas) Load() error {
-	var file []byte
+	var data []byte
 	if fileExist(filename) {
-		file, _ = ioutil.ReadFile(filename)
+		data, _ = ioutil.ReadFile(filename)
 	} else {
 		dir, _ := os.UserHomeDir()
-		file, _ = ioutil.ReadFile(dir + "/" + filename)
+		data, _ = ioutil.ReadFile(dir + "/" + filename)
 	}
-	err := json.Unmarshal([]byte(file), &ideas)
+	err := json.Unmarshal([]byte(data), &ideas)
 	return err
 }
 
 // Save ideas to file
 func (ideas Ideas) Save() error {
 	//data to json
-	file, err := json.Marshal(ideas)
+	data, err := json.Marshal(ideas)
 	if err != nil {
 		return err
 	}
 
 	if fileExist(filename) {
-		err = ioutil.WriteFile(filename, file, 0644)
+		err = ioutil.WriteFile(filename, data, 0644)
 		return err
 	}
 
 	dir, _ := os.UserHomeDir()
-	err = ioutil.WriteFile(dir+"/"+filename, file, 0644)
+	err = ioutil.WriteFile(dir+"/"+filename, data, 0644)
 	return err
 }
 

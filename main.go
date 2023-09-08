@@ -17,7 +17,7 @@ func main() {
 		Name: "idea",
 		Usage: "A lighweight CLI tool for keeping your ideas. " +
 			"This is a cloned version of idea CLI tool written in golang. " +
-			"https://github.com/rmsubekti/idea",
+			"https://github.com/rmsubekti/ideas/releases",
 		UsageText: "idea [command] <idea|state|id>",
 		Action: func(c *cli.Context) error {
 			ideas.ListByState("OPEN")
